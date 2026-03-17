@@ -1,0 +1,44 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:swarm}",
+            "name": "Debug swarm",
+            "target": "swarm",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug swarm"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:swarm}",
+            "name": "Release swarm",
+            "target": "swarm",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release swarm"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:swarm}",
+            "name": "Debug rcount",
+            "target": "rcount",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug rcount"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:swarm}",
+            "name": "Release rcount",
+            "target": "rcount",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release rcount"
+        }
+    ]
+}
