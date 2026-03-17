@@ -12,7 +12,7 @@ A macOS CLI tool to quickly manage multiple GitHub repositories from the termina
 ---
 
 ## About
-Built with Swift 5 and ArgumentParser. Project initiated on 2026-03-16 and is currently at version 0.1.2.
+Built with Swift 5 and ArgumentParser. Project initiated on 2026-03-16 and is currently at version 0.1.3.
 
 ---
 
