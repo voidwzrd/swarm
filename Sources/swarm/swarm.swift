@@ -10,24 +10,18 @@ struct Swarm: ParsableCommand {
         subcommands: [GitInit.self]
     )
 
-    @Flag(name: .long, help: "In progress: --dry-run to avoid accidental changes")
+    @Flag(name: .long, help: "\(dryRunDescription)")
     var dryRun = false
     
     func run() {
-        let welcomeMessage =
-        """
-        At present, `swarm` permits only a single choice.
-        Do you wish to proceed with initializing multiple GitHub repositories? (y/n):
-        """
-
-        print(welcomeMessage, terminator: "")
+        print(initPrompt, terminator: "")
 
         if let response = readLine() {
             if response.lowercased() == "y" {
                 print("Continuing...")
                 GitInit.main()
             } else {
-                print("Canceled.")
+                print("Process terminated.")
             }
         }        
     }
