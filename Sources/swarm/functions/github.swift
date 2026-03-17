@@ -62,9 +62,4 @@ func deleteGitHubRepo(item: String) {
     } catch {
         print("ERROR: Failed to run command \(error)")
     }
-
-    let data = pipe.fileHandleForReading.readDataToEndOfFile()
-    let output = String(data: data, encoding: .utf8) ?? ""
-    
-    print(output)
 }
