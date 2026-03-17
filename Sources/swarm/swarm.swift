@@ -6,7 +6,7 @@ struct Swarm: ParsableCommand {
     static let configuration: CommandConfiguration = CommandConfiguration(
         commandName: "swarm",
         abstract: "Batch process tasks on the command line",
-        version: "0.1.1",
+        version: "0.1.2",
         subcommands: [GitInit.self]
     )
 
