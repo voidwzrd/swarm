@@ -13,7 +13,8 @@ struct GitInit: ParsableCommand {
     func run() throws {
         let fm = FileManager.default
         let path = URL(fileURLWithPath: fm.currentDirectoryPath)
-        let isPathRepo = runGit(args: repoValidationArgs)
+
+        let hasCurrentPathGit = runGit(args: repoValidationArgs)
         var notRepos = [String]()
         var remotelessRepos = [String]()
 
@@ -25,7 +26,7 @@ struct GitInit: ParsableCommand {
 // TASK: if it's already a repo, check if it has a remote
 
 
-        switch isPathRepo {
+        switch hasCurrentPathGit {
         case true:
             print(repoDetectedMessage)
         case false:
