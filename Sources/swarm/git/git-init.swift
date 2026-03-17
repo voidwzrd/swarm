@@ -15,11 +15,15 @@ struct GitInit: ParsableCommand {
         let path = URL(fileURLWithPath: fm.currentDirectoryPath)
         let isPathRepo = runGit(args: repoValidationArgs)
         var notRepos = [String]()
+        var remotelessRepos = [String]()
 
         let items = try fm.contentsOfDirectory(
             at: path,
             includingPropertiesForKeys: [.isDirectoryKey],
             options: [.skipsHiddenFiles])
+
+// TASK: if it's already a repo, check if it has a remote
+
 
         switch isPathRepo {
         case true:
@@ -33,9 +37,14 @@ struct GitInit: ParsableCommand {
                     let isPathGitRepo = runGit(args: [
                         "-C", item, "rev-parse", "--is-inside-work-tree",
                     ])
+                    let isPathGitRemote = runGit(args: ["-C", item, "remote"])
 
                     if !isPathGitRepo {
                         notRepos += [item]
+                    }
+
+                    if !isPathGitRemote {
+                        remotelessRepos += [item]
                     }
                 }
             }
@@ -53,9 +62,12 @@ struct GitInit: ParsableCommand {
                         for notRepo in notRepos {
                             print("Swarming \(notRepo)")
                             initGit(item: notRepo)
-                            addGit(item: notRepo)
-                            commitGit(item: notRepo)
-                            createGitHubRepo(item: notRepo)
+
+                            if remotelessRepos.contains(notRepo) {
+                                addGit(item: notRepo)
+                                commitGit(item: notRepo)
+                                createGitHubRepo(item: notRepo)
+                            }
                         }
                     }
                 }
