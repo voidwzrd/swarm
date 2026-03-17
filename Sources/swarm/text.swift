@@ -19,3 +19,5 @@ let repoValidationArgs = ["rev-parse", "--is-inside-work-tree"]
 let gitInitSuccessNotification = "`git init` successful"
 let gitAddSuccessNotification = "`git add` successful"
 let gitCommitSuccessNotification = "`git commit` successful"
+
+let processingMessage = "Processing..."

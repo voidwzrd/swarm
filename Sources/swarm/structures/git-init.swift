@@ -15,15 +15,13 @@ struct GitInit: ParsableCommand {
         let path = URL(fileURLWithPath: fm.currentDirectoryPath)
 
         let hasCurrentPathGit = runGit(args: repoValidationArgs)
-        var notInitRepos = [String]()
-        var notRemoteRepos = [String]()
+        var reposWithoutInit = [String]()
+        var reposWithoutRemote = [String]()
 
         let items = try fm.contentsOfDirectory(
             at: path,
             includingPropertiesForKeys: [.isDirectoryKey],
             options: [.skipsHiddenFiles])
-
-        // TASK: if it's already a repo, check if it has a remote
 
         switch hasCurrentPathGit {
         case true:
@@ -40,24 +38,24 @@ struct GitInit: ParsableCommand {
                     let hasPathGHRemote = runGit(args: ["-C", item, "remote"])
 
                     if !hasPathGit {
-                        notInitRepos += [item]
-                        notRemoteRepos += [item]
+                        reposWithoutInit += [item]
+                        reposWithoutRemote += [item]
                     } else if hasPathGit && !hasPathGHRemote {
-                        notRemoteRepos += [item]
+                        reposWithoutRemote += [item]
                     }
                 }
             }
 
-            if notInitRepos.count > 0 {
+            if reposWithoutInit.count > 0 {
                 print(
                     """
                     Swarm overview:
 
-                    The following \(notInitRepos.count == 1 ? "directory" : "directories") will be initialized:
-                    \("📁 \(notInitRepos.map { $0 }.joined(separator: "\n📁 "))")
+                    The following \(reposWithoutInit.count == 1 ? "directory" : "directories") will be initialized:
+                    \("📁 \(reposWithoutInit.map { $0 }.joined(separator: "\n📁 "))")
 
-                    The following \(notInitRepos.count == 1 ? "directory" : "directories") will be mirrored to GitHub:
-                    \("📁 \(notRemoteRepos.map { $0 }.joined(separator: "\n📁 "))")
+                    The following \(reposWithoutInit.count == 1 ? "directory" : "directories") will be mirrored to GitHub:
+                    \("📁 \(reposWithoutRemote.map { $0 }.joined(separator: "\n📁 "))")
                     \(trustPrompt)
                     """, terminator: "")
 
@@ -65,11 +63,11 @@ struct GitInit: ParsableCommand {
                     if response == "y" {
                         print("Swarm in progress...")
 
-                        for notInitRepo in notInitRepos {
+                        for notInitRepo in reposWithoutInit {
                             initGit(item: notInitRepo)
                         }
 
-                        for notRemoteRepo in notRemoteRepos {
+                        for notRemoteRepo in reposWithoutRemote {
                                 addGit(item: notRemoteRepo)
                                 commitGit(item: notRemoteRepo)
                                 createGitHubRepo(item: notRemoteRepo)

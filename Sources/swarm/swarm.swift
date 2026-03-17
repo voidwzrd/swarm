@@ -7,7 +7,7 @@ struct Swarm: ParsableCommand {
         commandName: "swarm",
         abstract: "Batch process tasks on the command line",
         version: "0.1.4",
-        subcommands: [GitInit.self]
+        subcommands: [GhDelete.self, GitInit.self]
     )
 
     @Flag(name: .long, help: "\(dryRunDescription)")
