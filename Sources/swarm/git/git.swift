@@ -13,7 +13,7 @@ func addGit(item: String) {
         try process.run()
         process.waitUntilExit()
 
-        print(gitAddSuccessNotification)
+        print("\(item): \(gitAddSuccessNotification)")
     } catch {
         print(error)
     }
@@ -32,7 +32,7 @@ func commitGit(item: String) {
         try process.run()
         process.waitUntilExit()
 
-        print(gitCommitSuccessNotification)
+        print("\(item): \(gitCommitSuccessNotification)")
     } catch {
         print(error)
     }
@@ -76,7 +76,7 @@ func initGit(item: String) {
         try process.run()
         process.waitUntilExit()
 
-        print(gitInitSuccessNotification)
+        print("\(item): \(gitInitSuccessNotification)")
     } catch {
         print(error)
     }
