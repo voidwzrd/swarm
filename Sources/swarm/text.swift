@@ -16,4 +16,5 @@ let repoDetectedMessage = "Already inside a git repo. Skipping swarm."
 let repoValidationArgs = ["rev-parse", "--is-inside-work-tree"]
 
 let gitInitSuccessNotification = "`git init` successful"
-let gitAddCommitSuccessNotification = "`git add/commit` successful"
+let gitAddSuccessNotification = "`git add` successful"
+let gitCommitSuccessNotification = "`git commit` successful"

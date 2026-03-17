@@ -33,7 +33,8 @@ struct GitInit: ParsableCommand {
 
                     if !isPathGitRepo {
                         initGit(item: item)
-                        addCommitGit(item: item)
+                        addGit(item: item)
+                        commitGit(item: item)
                         createGitHubRepo(item: item)
                     }
                 }

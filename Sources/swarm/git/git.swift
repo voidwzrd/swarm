@@ -1,9 +1,9 @@
 import Foundation
 
-func addCommitGit(item: String) {
+func addGit(item: String) {
     let process = Process()
     process.executableURL = URL(fileURLWithPath: "/usr/bin/git")
-    process.arguments = ["-C", item, "add", ".", "&&", "git", "commit", "-m", "testing repo-ifying of \(item)"]
+    process.arguments = ["-C", item, "add", "."]
 
     let pipe = Pipe()
     process.standardOutput = pipe
@@ -13,7 +13,26 @@ func addCommitGit(item: String) {
         try process.run()
         process.waitUntilExit()
 
-        print(gitAddCommitSuccessNotification)
+        print(gitAddSuccessNotification)
+    } catch {
+        print(error)
+    }
+}
+
+func commitGit(item: String) {
+    let process = Process()
+    process.executableURL = URL(fileURLWithPath: "/usr/bin/git")
+    process.arguments = ["-C", item, "commit", "-m", "testing repo-ifying of \(item)"]
+
+    let pipe = Pipe()
+    process.standardOutput = pipe
+    process.standardError = pipe
+
+    do {
+        try process.run()
+        process.waitUntilExit()
+
+        print(gitCommitSuccessNotification)
     } catch {
         print(error)
     }
@@ -25,7 +44,7 @@ func createGitHubRepo(item: String)  {
     let process = Process()
     process.executableURL = URL(fileURLWithPath: command)
     process.currentDirectoryURL = URL(fileURLWithPath: item)
-    process.arguments = ["repo", "create", item, "--public", "--source=.", "--remote=origin", "--push"]
+    process.arguments = ["repo", "create", item, "--source=.", "--push", "--public"]
 
     let pipe = Pipe()
     process.standardOutput = pipe
