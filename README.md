@@ -1,34 +1,45 @@
 # swarm
-CLI tool to run multiple processes at once
+A macOS CLI tool to quickly manage multiple GitHub repositories from the terminal.
+
+⚠️⚠️⚠️ WARNING — CLONING, INSTALLING, AND USING `swarm` SHOULD BE DONE WITH EXTREME CAUTION. IT IS IN THE EARLY STAGES OF DEVELOPMENT. voidwzrd IS NOT RESPONSIBLE FOR WHAT HAPPENS. ⚠️⚠️⚠️
+
+## Table of Contents
+- [About](#about)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+
 ---
-- Date started: 2026-03-16
-- Version: 0.1.1
 
-## Download and Install
-⚠️ WARNING — SHOULD YOU CHOOSE TO CLONE THIS REPO, voidwzrd IS NOT RESPONSIBLE FOR WHAT HAPPENS. IT IS IN THE EARLY STAGES OF DEVELOPMENT.
+## About
+Built with Swift 5 and ArgumentParser. Project initiated on 2026-03-16 and is currently at version 0.1.1.
 
-1. Clone repo from Github
-```
-git@github.com:voidwzrd/swarm.git
-cd rcount
-```
+---
 
-2. Build the executable via Swift Package Manager
-```
+## Features
+- Initialize multiple repositories with a single command
+- Supports dry-run and verbose modes
+- Automatically ignores nested repositories
+- macOS
+
+---
+
+## Installation
+⚠️⚠️⚠️ WARNING — CLONING, INSTALLING, AND USING `swarm` SHOULD BE DONE WITH EXTREME CAUTION. IT IS IN THE EARLY STAGES OF DEVELOPMENT. voidwzrd IS NOT RESPONSIBLE FOR WHAT HAPPENS. ⚠️⚠️⚠️
+
+```bash
+git clone git@github.com:voidwzrd/swarm.git
+cd swarm
 swift build -c release
 ```
 
-4. Install Globally
+To install globally, run
 ```
 sudo mv .build/release/swarm /usr/local/bin/swarm
 ```
 
-5. Verify installation
-```
-which rcount
-```
+To verify installation, run `which swarm`.
 
-## Use
-⚠️ WARNING — SHOULD YOU CHOOSE TO USE THIS REPO, voidwzrd IS NOT RESPONSIBLE FOR WHAT HAPPENS. IT IS IN THE EARLY STAGES OF DEVELOPMENT.
+## Usage
 
 Run with `swarm`. Currently, it does only thing: Initializes multiple git repos > creates GitHub remote repos. To skip introduction, run `swarm git-init`.
