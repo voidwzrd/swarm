@@ -1,5 +1,5 @@
 # swarm
-A macOS CLI tool to quickly manage multiple GitHub repositories from the terminal.
+macOS Terminal app that concurrently processes batches of commands
 
 ⚠️ Under development. Use at your own risk. ⚠️
 
