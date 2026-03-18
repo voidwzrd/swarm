@@ -10,7 +10,7 @@ struct GhDelete: ParsableCommand {
         let fm = FileManager.default
         let path = URL(fileURLWithPath: fm.currentDirectoryPath)
 
-        let hasCurrentPathGit = runGit(args: repoValidationArgs)
+        let hasCurrentPathGit = GitManager().runGitRevParse(item: path.lastPathComponent)
         var gitHubRepos = [String]()
 
         let items = try fm.contentsOfDirectory(
@@ -29,7 +29,7 @@ struct GhDelete: ParsableCommand {
                 let item = item.lastPathComponent
 
                 if values.isDirectory == true {
-                    let isGitHubRepo = getGitHubRepoStatus(item: item)
+                    let isGitHubRepo = GithubManager().viewGithubStatus(item: item)
 
                     if isGitHubRepo {
                         gitHubRepos += [item]
@@ -50,10 +50,10 @@ struct GhDelete: ParsableCommand {
                 """, terminator: "")
             if let response = readLine() {
                 if response == "y" {
-                    print("Swarm in progress...")
+                    print(loadingMessage)
 
                     for gitHubRepo in gitHubRepos {
-                        deleteGitHubRepo(item: gitHubRepo)
+                        GithubManager().deleteGithubRepo(item: gitHubRepo)
                     }
 
                     print("Swarm complete.")

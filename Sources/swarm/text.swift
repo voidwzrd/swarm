@@ -13,11 +13,11 @@ let dryRunDescription = "Run simulation of swarm commands."
 let repoDetectedMessage = "Already inside a git repo. Skipping swarm."
 let notReposEmptyMessage = "All directories contain git repos. Skipping swarm."
 
-// ARGUMENT HELPERS
-let repoValidationArgs = ["rev-parse", "--is-inside-work-tree"]
-
 let gitInitSuccessNotification = "`git init` successful"
 let gitAddSuccessNotification = "`git add` successful"
 let gitCommitSuccessNotification = "`git commit` successful"
+let gitRevParseSuccessNotification = "`git rev-parse` successful"
 
 let processingMessage = "Processing..."
+
+let loadingMessage = "Swarm in progress..."

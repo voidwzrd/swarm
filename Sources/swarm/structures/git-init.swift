@@ -14,7 +14,7 @@ struct GitInit: ParsableCommand {
         let fm = FileManager.default
         let path = URL(fileURLWithPath: fm.currentDirectoryPath)
 
-        let hasCurrentPathGit = runGit(args: repoValidationArgs)
+        let hasCurrentPathGit = GitManager().runGitRevParse(item: path.lastPathComponent)
         var reposWithoutInit = [String]()
         var reposWithoutRemote = [String]()
 
@@ -32,15 +32,13 @@ struct GitInit: ParsableCommand {
                 let item = item.lastPathComponent
 
                 if values.isDirectory == true {
-                    let hasPathGit = runGit(args: [
-                        "-C", item, "rev-parse", "--is-inside-work-tree",
-                    ])
-                    let hasPathGHRemote = runGit(args: ["-C", item, "remote"])
+                    let hasPathGit = GitManager().runGitRevParse(item: item, path: item)
+                    let hasPathGhRemote = GitManager().runGitRemote(item: item)
 
                     if !hasPathGit {
                         reposWithoutInit += [item]
                         reposWithoutRemote += [item]
-                    } else if hasPathGit && !hasPathGHRemote {
+                    } else if hasPathGit && !hasPathGhRemote {
                         reposWithoutRemote += [item]
                     }
                 }
@@ -61,17 +59,17 @@ struct GitInit: ParsableCommand {
 
                 if let response = readLine() {
                     if response == "y" {
-                        print("Swarm in progress...")
+                        print(loadingMessage)
 
                         for notInitRepo in reposWithoutInit {
-                            initGit(item: notInitRepo)
+                            GitManager().runGitInit(item: notInitRepo)
                         }
 
                         for notRemoteRepo in reposWithoutRemote {
-                                runGitAdd(item: notRemoteRepo)
-                                runGitCommit(item: notRemoteRepo)
-                                createGitHubRepo(item: notRemoteRepo)
-                            }
+                            GitManager().runGitAdd(item: notRemoteRepo)
+                            GitManager().runGitCommit(item: notRemoteRepo)
+                            GithubManager().createGithubRepo(item: notRemoteRepo)
+                        }
                     }
                 }
                 print("Swarm complete.")

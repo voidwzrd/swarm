@@ -18,9 +18,7 @@ enum GithubAction {
 }
 
 struct GithubManager {
-    private func runCommand(in directory: String, action: GithubAction, item: String) -> (
-        success: Bool, output: String
-    ) {
+    private func runCommand(in directory: String, action: GithubAction, item: String) -> (success: Bool, output: String) {
         let process = Process()
         process.executableURL = URL(fileURLWithPath: "/opt/homebrew/bin/gh")
         process.currentDirectoryURL = URL(fileURLWithPath: directory)
@@ -54,8 +52,8 @@ struct GithubManager {
         print(result.success)
     }
 
-    func viewGithubStatus(item: String) {
+    func viewGithubStatus(item: String) -> Bool {
         let result = runCommand(in: item, action: .viewStatus, item: item)
-        print(result.success)
+        return result.success
     }
 }
