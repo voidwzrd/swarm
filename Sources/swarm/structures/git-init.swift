@@ -68,8 +68,8 @@ struct GitInit: ParsableCommand {
                         }
 
                         for notRemoteRepo in reposWithoutRemote {
-                                addGit(item: notRemoteRepo)
-                                commitGit(item: notRemoteRepo)
+                                runGitAdd(item: notRemoteRepo)
+                                runGitCommit(item: notRemoteRepo)
                                 createGitHubRepo(item: notRemoteRepo)
                             }
                     }

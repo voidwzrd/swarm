@@ -1,6 +1,6 @@
 import Foundation
 
-func addGit(item: String) {
+func runGitAdd(item: String) {
     let process = Process()
     process.executableURL = URL(fileURLWithPath: "/usr/bin/git")
     process.arguments = ["-C", item, "add", "."]
@@ -19,7 +19,7 @@ func addGit(item: String) {
     }
 }
 
-func commitGit(item: String) {
+func runGitCommit(item: String) {
     let process = Process()
     process.executableURL = URL(fileURLWithPath: "/usr/bin/git")
     process.arguments = ["-C", item, "commit", "-m", "testing repo-ifying of \(item)"]
