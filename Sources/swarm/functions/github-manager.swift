@@ -32,7 +32,7 @@ struct GithubManager {
             try process.run()
             process.waitUntilExit()
         } catch {
-            print("Error: Failed to run command \(error)")
+            print("35 Error: Failed to run command \(error)")
             return (false, "")
         }
 

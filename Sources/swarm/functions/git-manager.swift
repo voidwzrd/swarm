@@ -6,9 +6,8 @@ enum GitAction {
     case initGit
     case remote
     case revParse
-    case revParsePath
 
-    func arguments(for item: String) -> [String] {
+    func arguments(atPath path: String? = nil, for item: String) -> [String] {
         switch self {
         case .add:
             return ["-C", item, "add", "."]
@@ -19,9 +18,11 @@ enum GitAction {
         case .remote:
             return ["-C", item, "remote"]
         case .revParse:
-            return ["rev-parse", "--is-inside-work-tree"]
-        case .revParsePath:
-            return ["-C", item, "rev-parse", "--is-inside-work-tree"]
+            if let path = path {
+                return ["-C", path, "rev-parse", "--is-inside-work-tree", "HEAD"]
+            } else {
+                return ["rev-parse", "--is-inside-work-tree", "HEAD"]
+            }
         }
     }
 }
@@ -50,7 +51,7 @@ struct GitManager {
                 print("\(item): \(gitCommitSuccessNotification)")
             case .initGit:
                 print("\(item): \(gitInitSuccessNotification)")
-            case .revParse, .revParsePath:
+            case .revParse:
                 print("\(item): \(gitRevParseSuccessNotification)")
             default:
                 print("Action successful")
@@ -58,7 +59,7 @@ struct GitManager {
 
             return (true, "")
         } catch {
-            print("Error: Failed to run command \(error)")
+            print(error)
             return (false, "")
         }
     }
@@ -83,13 +84,9 @@ struct GitManager {
         return result.success
     }
 
-    func runGitRevParse(item: String) -> Bool {
+    func runGitRevParse(atPath path: String? = nil, item: String) -> Bool {
         let result = runCommand(in: item, action: .revParse, item: item)
-        return result.success
-    }
-
-    func runGitRevParse(item: String, path: String) -> Bool {
-        let result = runCommand(in: path, action: .revParsePath, item: item)
-        return result.success
+        print(result.output)
+        return true
     }
 }

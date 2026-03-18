@@ -7,23 +7,21 @@ struct GitInit: ParsableCommand {
             "Initializes a Git repository in the current or specified directory. Skips if repo already exists and reports success or failure."
     )
 
-    @Flag(name: .long, help: "\(dryRunDescription)")
-    var dryRun = false
-
     func run() throws {
-        let fm = FileManager.default
-        let path = URL(fileURLWithPath: fm.currentDirectoryPath)
+        let fileManager = FileManager.default
+        let path = URL(fileURLWithPath: fileManager.currentDirectoryPath)
 
-        let hasCurrentPathGit = GitManager().runGitRevParse(item: path.lastPathComponent)
+        let isCurrentPathGit = GitManager().runGitRevParse(item: "")
+
         var reposWithoutInit = [String]()
         var reposWithoutRemote = [String]()
 
-        let items = try fm.contentsOfDirectory(
+        let items = try fileManager.contentsOfDirectory(
             at: path,
             includingPropertiesForKeys: [.isDirectoryKey],
             options: [.skipsHiddenFiles])
 
-        switch hasCurrentPathGit {
+        switch isCurrentPathGit {
         case true:
             print(repoDetectedMessage)
         case false:
@@ -32,7 +30,7 @@ struct GitInit: ParsableCommand {
                 let item = item.lastPathComponent
 
                 if values.isDirectory == true {
-                    let hasPathGit = GitManager().runGitRevParse(item: item, path: item)
+                    let hasPathGit = GitManager().runGitRevParse(item: item)
                     let hasPathGhRemote = GitManager().runGitRemote(item: item)
 
                     if !hasPathGit {
@@ -44,7 +42,7 @@ struct GitInit: ParsableCommand {
                 }
             }
 
-            if reposWithoutInit.count > 0 {
+            if reposWithoutInit.count > 0 || reposWithoutRemote.count > 0 {
                 print(
                     """
                     Swarm overview:
@@ -63,6 +61,7 @@ struct GitInit: ParsableCommand {
 
                         for notInitRepo in reposWithoutInit {
                             GitManager().runGitInit(item: notInitRepo)
+                            print("GI64")
                         }
 
                         for notRemoteRepo in reposWithoutRemote {
