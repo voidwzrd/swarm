@@ -1,7 +1,7 @@
 # swarm
 A macOS CLI tool to quickly manage multiple GitHub repositories from the terminal.
 
-⚠️⚠️⚠️ WARNING — CLONING, INSTALLING, AND USING `swarm` SHOULD BE DONE WITH EXTREME CAUTION. IT IS IN THE EARLY STAGES OF DEVELOPMENT. voidwzrd IS NOT RESPONSIBLE FOR WHAT HAPPENS. ⚠️⚠️⚠️
+⚠️ Under development. Use at your own risk. ⚠️
 
 ## Table of Contents
 - [About](#about)
@@ -25,7 +25,7 @@ Built with Swift 5 and ArgumentParser. Project initiated on 2026-03-16 and is cu
 ---
 
 ## Installation
-⚠️⚠️⚠️ WARNING — CLONING, INSTALLING, AND USING `swarm` SHOULD BE DONE WITH EXTREME CAUTION. IT IS IN THE EARLY STAGES OF DEVELOPMENT. voidwzrd IS NOT RESPONSIBLE FOR WHAT HAPPENS. ⚠️⚠️⚠️
+⚠️ Under development. Use at your own risk. ⚠️
 
 ```bash
 git clone git@github.com:voidwzrd/swarm.git
