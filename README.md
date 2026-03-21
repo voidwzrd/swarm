@@ -1,7 +1,7 @@
 # swarm
-macOS Terminal app that concurrently processes batches of commands
+macOS Terminal app that concurrently processes batches of commands. Archived days after starting to wrap into a new project.
 
-⚠️ Under development. Use at your own risk. ⚠️
+⚠️ No longer developed. Will be wrapped into future project. Use at your own risk. ⚠️
 
 ## Table of Contents
 - [About](#about)
@@ -25,7 +25,7 @@ Built with Swift 5 and ArgumentParser. Project initiated on 2026-03-16 and is cu
 ---
 
 ## Installation
-⚠️ Under development. Use at your own risk. ⚠️
+⚠️ No longer developed. Will be wrapped into future project. Use at your own risk. ⚠️
 
 ```bash
 git clone git@github.com:voidwzrd/swarm.git
